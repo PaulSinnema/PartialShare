@@ -7,12 +7,38 @@
         mc:Ignorable="d"
         x:Name="Tools"
         Title="ToolWindow"
+        Background="Transparent"
+        AllowsTransparency="False"
+        WindowStyle="ThreeDBorderWindow"
+        ResizeMode="NoResize"
         MaxWidth="800"
         MaxHeight="450"
-        Height="450"
-        Width="800">
-    <Grid>
-        <Button Click="Button_Click">Click me</Button>
+        Height="600"
+        Width="920">
+    <Border Background="#272537">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Partial share"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="20,0,0,0"
+                       Foreground="White"
+                       FontSize="22"/>
+
+            <StackPanel Grid.Row="1">
+                <Button Click="Button_Click"
+                        Style="{StaticResource ButtonTheme}">Resize partial window</Button>
+
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
