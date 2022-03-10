@@ -22,7 +22,8 @@
 
                                 <Label Content="{TemplateBinding Content}"
                                        Grid.Column="1"
-                                       Height="70"
+                                       Height="auto"
+                                       Width="auto"
                                        Padding="20"
                                        HorizontalContentAlignment="Center"
                                        VerticalContentAlignment="Center"

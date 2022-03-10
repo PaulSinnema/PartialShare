@@ -11,10 +11,8 @@
         AllowsTransparency="False"
         WindowStyle="ThreeDBorderWindow"
         ResizeMode="NoResize"
-        MaxWidth="800"
-        MaxHeight="450"
-        Height="600"
-        Width="920">
+        Height="400"
+        Width="620">
     <Border Background="#272537">
         <Grid>
             <Grid.RowDefinitions>
