@@ -12,6 +12,7 @@
         Height="450"
         Width="800">
     <Grid>
-        
+        <Button Click="Button_Click">Click me</Button>
+
     </Grid>
 </Window>

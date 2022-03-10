@@ -8,10 +8,14 @@ namespace PartialShare
     /// </summary>
     public partial class ToolWindow : Window
     {
-        public ToolWindow()
+        public ToolWindow(MainWindow mainWindow)
         {
+            MainWindow = mainWindow;
+
             InitializeComponent();
         }
+
+        private MainWindow MainWindow { get; set; }
 
         protected override void OnActivated(EventArgs e)
         {
@@ -23,6 +27,11 @@ namespace PartialShare
             base.OnClosed(e);
 
             Application.Current.Shutdown();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.ToggleResizing();
         }
     }
 }

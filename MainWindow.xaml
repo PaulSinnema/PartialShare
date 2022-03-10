@@ -6,16 +6,15 @@
         Title="PartialShare"
         x:Name="PartialShare"
         mc:Ignorable="d"
-        BorderThickness="4"
-        BorderBrush="Blue"
+        BorderThickness="1"
+        BorderBrush="Red"
         Height="1000"
         Width="1000"
         ResizeMode="CanResizeWithGrip"
-        Opacity="0.5"
+        Opacity="0"
         Topmost="True"
         AllowsTransparency="True"
         WindowStyle="None">
-
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="30"  
