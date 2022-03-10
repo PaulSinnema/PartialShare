@@ -46,7 +46,7 @@ namespace PartialShare
             else
             {
                 PartialShare.Opacity = 0;
-                BorderThickness = new Thickness(0);
+                BorderThickness = new Thickness(1);
             }
         }
 
