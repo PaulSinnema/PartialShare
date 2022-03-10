@@ -37,6 +37,31 @@
                         Style="{StaticResource ButtonTheme}">Resize partial window</Button>
 
             </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label  Foreground="White">Border thickness</Label>
+
+                    <Slider Grid.Column="1"
+                            x:Name="BorderSize"
+                            Minimum="1"
+                            Maximum="200"
+                            Margin="10, 6, 20, 0"
+                            ValueChanged="Slider_ValueChanged"
+                            Height="auto"/>
+                </Grid>
+
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

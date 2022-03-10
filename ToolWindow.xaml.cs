@@ -10,10 +10,12 @@ namespace PartialShare
     {
         public ToolWindow(MainWindow mainWindow)
         {
+            InitializeComponent();
+
             MainWindow = mainWindow;
 
-            InitializeComponent();
-        }
+            BorderSize.Value = MainWindow.BorderSize;
+        }   
 
         private MainWindow MainWindow { get; set; }
 
@@ -31,7 +33,13 @@ namespace PartialShare
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.ToggleResizing();
+            BorderSize.IsEnabled = MainWindow.ToggleResizing();
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(MainWindow != null)
+                MainWindow.BorderSize = e.NewValue;
         }
     }
 }

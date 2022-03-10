@@ -8,26 +8,39 @@ namespace PartialShare
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const double BorderSize = 20;
+        private double _BorderSize = 20;
+
+        public double BorderSize
+        {
+            get => _BorderSize;
+            set
+            {
+                _BorderSize = value;
+
+                this.BorderThickness = new Thickness(value);
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ToolWindow toolWindow = new ToolWindow(this);
-
             Resizing = true;
 
             DimBorders(Resizing);
-            
+
+            ToolWindow toolWindow = new ToolWindow(this);
+
             toolWindow.Show();
         }
 
-        public void ToggleResizing()
+        public bool ToggleResizing()
         {
             Resizing = !Resizing;
 
             DimBorders(Resizing);
+
+            return Resizing;
         }
 
         private bool Resizing { get; set; }
@@ -51,7 +64,7 @@ namespace PartialShare
             }
             else
             {
-                PartialShare.Opacity = 0;
+                PartialShare.Opacity = 1;
                 BorderThickness = new Thickness(1);
             }
         }
