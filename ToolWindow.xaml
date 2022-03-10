@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         x:Name="Tools"
         Title="ToolWindow"
+        MaxWidth="800"
+        MaxHeight="450"
         Height="450"
         Width="800">
     <Grid>

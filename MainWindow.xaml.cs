@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Interop;
+﻿using System.Windows;
 
 namespace PartialShare
 {
@@ -11,22 +9,11 @@ namespace PartialShare
     {
         public MainWindow()
         {
-            ToolWindow tw = new ToolWindow();
-            tw.Show();
+            ToolWindow toolWindow = new ToolWindow();
+
+            toolWindow.Show();
 
             InitializeComponent();
-        }
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-
-            // Make entire window and everything in it transparent to the Mouse
-
-            // Make the button "visible" to the Mouse
-            // var buttonHwndSource = (HwndSource)HwndSource.FromVisual(btn);
-            // var buttonHwnd = buttonHwndSource.Handle;
-            // WindowsServices.SetWindowExNotTransparent(buttonHwnd);
         }
     }
 }
