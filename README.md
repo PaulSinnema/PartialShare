@@ -1,4 +1,4 @@
-[PartialShare]
+## PartialShare
 
 I few months ago I bought myself a nice curved 49" Monitor with my computer system. It is a beautiful screen with lots of working space. I work a lot at home these days and collaborate with my colleagues using software like Microsoft Teams.
 
