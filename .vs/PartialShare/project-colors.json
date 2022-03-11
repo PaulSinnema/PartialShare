@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f3abce27-c8bc-4c35-ae57-91740d63b907": {
+      "ProjectGuid": "f3abce27-c8bc-4c35-ae57-91740d63b907",
+      "DisplayName": "PartialShare",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "20196213-dfb0-4230-a268-29964cb1debd": {
+      "ProjectGuid": "20196213-dfb0-4230-a268-29964cb1debd",
+      "DisplayName": "PartialShare.Core",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
