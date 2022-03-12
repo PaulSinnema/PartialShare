@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PartialShare
 {
@@ -15,7 +17,11 @@ namespace PartialShare
             MainWindow = mainWindow;
 
             BorderSize.Value = MainWindow.BorderSize;
-        }   
+
+            Controls.Add(BorderSize);
+        }
+
+        private List<Control> Controls = new List<Control>();
 
         private MainWindow MainWindow { get; set; }
 
@@ -33,7 +39,15 @@ namespace PartialShare
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BorderSize.IsEnabled = MainWindow.ToggleResizing();
+            var resizing = MainWindow.ToggleResizing();
+
+            BorderSize.IsEnabled = resizing;
+            DimControls(resizing);
+        }
+
+        private void DimControls(bool resizing)
+        {
+            Controls.ForEach(c => c.Opacity = resizing ? 1 : 0.5);
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

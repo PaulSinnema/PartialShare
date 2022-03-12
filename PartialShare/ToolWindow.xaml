@@ -54,8 +54,8 @@
 
                     <Slider Grid.Column="1"
                             x:Name="BorderSize"
-                            Minimum="1"
-                            Maximum="200"
+                            Minimum="10"
+                            Maximum="50"
                             Margin="10, 6, 20, 0"
                             ValueChanged="Slider_ValueChanged"
                             Height="auto"/>
