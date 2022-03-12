@@ -23,11 +23,9 @@ namespace PartialShare
 
         public ToolWindow(MainWindow mainWindow)
         {
-            InitializeComponent();
-
             MainWindow = mainWindow;
 
-            BorderSize.Value = MainWindow.BorderSize;
+            InitializeComponent();
 
             InitControls();
         }
@@ -45,11 +43,11 @@ namespace PartialShare
         /// </summary>
         private bool Resizing => MainWindow.IsResizing;
 
-        protected override void OnInitialized(EventArgs e)
+        public void Initialize()
         {
-            SetControls();
+            BorderSize.Value = MainWindow.BorderSize;
 
-            base.OnInitialized(e);
+            SetControls();
         }
 
         protected override void OnClosed(EventArgs e)

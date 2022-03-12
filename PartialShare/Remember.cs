@@ -1,4 +1,6 @@
-﻿namespace PartialShare
+﻿using System.Windows;
+
+namespace PartialShare
 {
     internal class Remember
     {
@@ -44,5 +46,6 @@
         public double LastHeight { get; set; }
         public bool IsResizing { get; set; }
         public double BorderSize { get; set; }
+        public WindowState ToolWindowState { get; set; }
     }
 }

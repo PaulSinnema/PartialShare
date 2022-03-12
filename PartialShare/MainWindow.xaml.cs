@@ -18,7 +18,7 @@ namespace PartialShare
         /// <summary>
         /// The ToolWindow reference.
         /// </summary>
-        private ToolWindow ToolWindow { get; set; }
+        private ToolWindow ToolWindow { get; set; } = null;
 
         private double _BorderSize = DefaultBorderSize;
 
@@ -39,10 +39,6 @@ namespace PartialShare
         public MainWindow()
         {
             InitializeComponent();
-
-            ToolWindow = new ToolWindow(this);
-
-            ToolWindow.Show();
         }
 
         /// <summary>
@@ -58,6 +54,7 @@ namespace PartialShare
                 Height = remember.LastHeight;
                 IsResizing = remember.IsResizing;
                 BorderSize = remember.BorderSize == 0 ? DefaultBorderSize : remember.BorderSize;
+                ToolWindow.WindowState = remember.ToolWindowState;
             }
 
             DimBorders();
@@ -75,7 +72,8 @@ namespace PartialShare
                 LastWidth = Width,
                 LastHeight = Height,
                 IsResizing = IsResizing,
-                BorderSize = BorderSize
+                BorderSize = BorderSize,
+                ToolWindowState = ToolWindow.WindowState
             };
 
             return remember;
@@ -115,15 +113,35 @@ namespace PartialShare
             return remember;
         }
 
+        /// <summary>
+        /// Initialization of MainWindow is complete.
+        /// </summary>
         protected override void OnInitialized(EventArgs e)
         {
-            RestoreRemember();
-
-            DimBorders();
+            InitializeWindows();
 
             base.OnInitialized(e);
         }
 
+        /// <summary>
+        /// Create the ToolWindow and restore and initialize parameters.
+        /// </summary>
+        private void InitializeWindows()
+        {
+            ToolWindow = new ToolWindow(this);
+
+            RestoreRemember();
+
+            ToolWindow.Initialize();
+
+            ToolWindow.Show();
+
+            DimBorders();
+        }
+
+        /// <summary>
+        /// Application is closing (initiated from ToolWindow). Save parameters.
+        /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
             SaveRemember(GetRemember());
