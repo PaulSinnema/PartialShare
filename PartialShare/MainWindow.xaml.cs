@@ -14,10 +14,16 @@ namespace PartialShare
     {
         private const string RememberFile = "PartialShare.json";
 
-        private Remember? Remember { get; set; }
+        /// <summary>
+        /// The ToolWindow reference.
+        /// </summary>
+        private ToolWindow ToolWindow { get; set; }
 
-        private double _BorderSize = 20;
+        private double _BorderSize = 10;
 
+        /// <summary>
+        /// The thickness of the border.
+        /// </summary>
         public double BorderSize
         {
             get => _BorderSize;
@@ -33,13 +39,14 @@ namespace PartialShare
         {
             InitializeComponent();
 
-            DimBorders(Resizing);
+            ToolWindow = new ToolWindow(this);
 
-            ToolWindow toolWindow = new ToolWindow(this);
-
-            toolWindow.Show();
+            ToolWindow.Show();
         }
 
+        /// <summary>
+        /// Set values for the MainWindow using a Remember object.
+        /// </summary>
         private void SetRemember(Remember? remember)
         {
             if (remember != null)
@@ -48,12 +55,15 @@ namespace PartialShare
                 Left = remember.LastX;
                 Width = remember.LastWidth;
                 Height = remember.LastHeight;
-                Resizing = remember.IsResizing;
+                IsResizing = remember.IsResizing;
             }
 
-            DimBorders(Resizing);
+            DimBorders();
         }
 
+        /// <summary>
+        /// Get a Remember object with values of the MainWindow.
+        /// </summary>
         private Remember GetRemember()
         {
             var remember = new Remember()
@@ -62,58 +72,65 @@ namespace PartialShare
                 LastY = Top,
                 LastWidth = Width,
                 LastHeight = Height,
-                IsResizing = Resizing
+                IsResizing = IsResizing
             };
 
             return remember;
         }
 
+        /// <summary>
+        /// Read the Remember json from disk and restore the values to the MainWindow.
+        /// </summary>
         private void RestoreRemember()
         {
-            Remember? remember = null;
-
             if (File.Exists(RememberFile))
             {
-                var file = File.OpenRead(RememberFile);
-
-                var buffer = new byte[file.Length];
-
-                file.Read(buffer, 0, (int)file.Length);
-
-                file.Close();
-                file.Dispose();
-
-                var content = UTF8Encoding.ASCII.GetString(buffer);
-
-                remember = Newtonsoft.Json.JsonConvert.DeserializeObject<Remember>(content);
+                Remember? remember = GetFileContent(RememberFile);
 
                 SetRemember(remember);
             }
         }
 
-        private bool IsActivated = false;
-
-        protected override void OnActivated(EventArgs e)
+        /// <summary>
+        /// Read the Remember json file from disk and return its Contents as a Remember object.
+        /// </summary>
+        private static Remember? GetFileContent(string path)
         {
-            if (!IsActivated)
-            {
-                RestoreRemember();
+            var file = File.OpenRead(path);
 
-                IsActivated = true;
-            }
+            var buffer = new byte[file.Length];
 
-            base.OnActivated(e);
+            file.Read(buffer, 0, (int)file.Length);
+
+            file.Close();
+            file.Dispose();
+
+            var content = UTF8Encoding.ASCII.GetString(buffer);
+
+            var remember = Newtonsoft.Json.JsonConvert.DeserializeObject<Remember>(content);
+
+            return remember;
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            RestoreRemember();
+
+            DimBorders();
+
+            base.OnInitialized(e);
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            var remember = GetRemember();
-
-            SaveRemember(remember);
+            SaveRemember(GetRemember());
 
             base.OnClosing(e);
         }
 
+        /// <summary>
+        /// Save a Remember object as a json to disk.
+        /// </summary>
         private static void SaveRemember(Remember remember)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(remember);
@@ -127,30 +144,30 @@ namespace PartialShare
             file.Dispose();
         }
 
+        /// <summary>
+        /// Toggle the resizing option and set borders accordingly.
+        /// </summary>
         public bool ToggleResizing()
         {
-            Resizing = !Resizing;
+            IsResizing = !IsResizing;
 
-            DimBorders(Resizing);
+            DimBorders();
 
-            return Resizing;
+            return IsResizing;
         }
 
-        private bool Resizing { get; set; }
+        /// <summary>
+        /// Public boolean that tells wether we are Resizing or not.
+        /// </summary>
+        public bool IsResizing { get; private set; }
 
-        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Set the opacity and thinckness of the border of the MainWindow depending
+        /// on wether we are resizing or not.
+        /// </summary>
+        private void DimBorders()
         {
-            DimBorders(Resizing);
-        }
-
-        private void Border_MouseLeave(object sender, MouseEventArgs e)
-        {
-            DimBorders(Resizing);
-        }
-
-        private void DimBorders(bool high)
-        {
-            if (high)
+            if (IsResizing)
             {
                 PartialShare.Opacity = 1;
                 BorderThickness = new Thickness(BorderSize);
@@ -160,13 +177,6 @@ namespace PartialShare
                 PartialShare.Opacity = 0.5;
                 BorderThickness = new Thickness(1);
             }
-        }
-
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Resizing = !Resizing;
-
-            DimBorders(Resizing);
         }
     }
 }

@@ -6,10 +6,21 @@ using System.Windows.Controls;
 namespace PartialShare
 {
     /// <summary>
-    /// Interaction logic for ToolWindow.xaml
+    /// This is the toolbox for Partial share.
+    /// From this application several settings for the Mainwindow are controlled.
     /// </summary>
     public partial class ToolWindow : Window
     {
+        /// <summary>
+        /// List of controls. Used for enabling and dimming.
+        /// </summary>
+        private List<Control> Controls = new List<Control>();
+
+        /// <summary>
+        /// MainWindow reference injected from the MainWindow.
+        /// </summary>
+        private MainWindow MainWindow { get; set; }
+
         public ToolWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -18,16 +29,27 @@ namespace PartialShare
 
             BorderSize.Value = MainWindow.BorderSize;
 
+            InitControls();
+        }
+
+        /// <summary>
+        /// Initialize the list of controls.
+        /// </summary>
+        private void InitControls()
+        {
             Controls.Add(BorderSize);
         }
 
-        private List<Control> Controls = new List<Control>();
+        /// <summary>
+        /// Resizing fetched from the MainWindow.
+        /// </summary>
+        private bool Resizing => MainWindow.IsResizing;
 
-        private MainWindow MainWindow { get; set; }
-
-        protected override void OnActivated(EventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
-            base.OnActivated(e);
+            SetControls();
+
+            base.OnInitialized(e);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -37,20 +59,31 @@ namespace PartialShare
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// The Resizing button was clicked. Toggle it on the MainWindow.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var resizing = MainWindow.ToggleResizing();
 
-            BorderSize.IsEnabled = resizing;
-
-            DimControls(resizing);
+            SetControls();
         }
 
-        private void DimControls(bool resizing)
+        /// <summary>
+        /// Set various properties on all controls in the Controls list.
+        /// </summary>
+        private void SetControls()
         {
-            Controls.ForEach(c => c.Opacity = resizing ? 1 : 0.5);
+            Controls.ForEach(c =>
+            {
+                c.Opacity = Resizing ? 1 : 0.5;
+                c.IsEnabled = Resizing;
+            });
         }
 
+        /// <summary>
+        /// The Slider has a new value. Set it on the MainWindow.
+        /// </summary>
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if(MainWindow != null)
