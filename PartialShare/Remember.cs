@@ -42,5 +42,6 @@
         public double LastY { get; set; }  
         public double LastWidth { get; set; }
         public double LastHeight { get; set; }
+        public bool IsResizing { get; set; }
     }
 }

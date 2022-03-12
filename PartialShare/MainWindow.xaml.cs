@@ -33,8 +33,6 @@ namespace PartialShare
         {
             InitializeComponent();
 
-            Resizing = true;
-
             DimBorders(Resizing);
 
             ToolWindow toolWindow = new ToolWindow(this);
@@ -46,21 +44,25 @@ namespace PartialShare
         {
             if (remember != null)
             {
-                this.Top = remember.LastY;
-                this.Left = remember.LastX;
-                this.Width = remember.LastWidth;
-                this.Height = remember.LastHeight;
+                Top = remember.LastY;
+                Left = remember.LastX;
+                Width = remember.LastWidth;
+                Height = remember.LastHeight;
+                Resizing = remember.IsResizing;
             }
+
+            DimBorders(Resizing);
         }
 
         private Remember GetRemember()
         {
             var remember = new Remember()
             {
-                LastX = this.Left,
-                LastY = this.Top,
-                LastWidth = this.Width,
-                LastHeight = this.Height
+                LastX = Left,
+                LastY = Top,
+                LastWidth = Width,
+                LastHeight = Height,
+                IsResizing = Resizing
             };
 
             return remember;
