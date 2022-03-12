@@ -56,7 +56,7 @@ namespace PartialShare
                 ToolWindow.WindowState = remember.ToolWindowState;
             }
 
-            DimBorders();
+            SetMainWindowState();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace PartialShare
 
             ToolWindow.Show();
 
-            DimBorders();
+            SetMainWindowState();
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace PartialShare
         {
             IsResizing = !IsResizing;
 
-            DimBorders();
+            SetMainWindowState();
 
             return IsResizing;
         }
@@ -185,15 +185,17 @@ namespace PartialShare
         /// Set the opacity and thinckness of the border of the MainWindow depending
         /// on wether we are resizing or not.
         /// </summary>
-        private void DimBorders()
+        private void SetMainWindowState()
         {
             if (IsResizing)
             {
+                ResizeMode = ResizeMode.CanResize;
                 PartialShare.Opacity = 1;
                 BorderThickness = new Thickness(BorderSize);
             }
             else
             {
+                ResizeMode = ResizeMode.NoResize;
                 PartialShare.Opacity = 0.5;
                 BorderThickness = new Thickness(1);
             }
