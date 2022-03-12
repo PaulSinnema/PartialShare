@@ -13,13 +13,14 @@ namespace PartialShare
     public partial class MainWindow : Window
     {
         private const string RememberFile = "PartialShare.json";
+        private const double DefaultBorderSize = 10;
 
         /// <summary>
         /// The ToolWindow reference.
         /// </summary>
         private ToolWindow ToolWindow { get; set; }
 
-        private double _BorderSize = 10;
+        private double _BorderSize = DefaultBorderSize;
 
         /// <summary>
         /// The thickness of the border.
@@ -56,6 +57,7 @@ namespace PartialShare
                 Width = remember.LastWidth;
                 Height = remember.LastHeight;
                 IsResizing = remember.IsResizing;
+                BorderSize = remember.BorderSize == 0 ? DefaultBorderSize : remember.BorderSize;
             }
 
             DimBorders();
@@ -72,7 +74,8 @@ namespace PartialShare
                 LastY = Top,
                 LastWidth = Width,
                 LastHeight = Height,
-                IsResizing = IsResizing
+                IsResizing = IsResizing,
+                BorderSize = BorderSize
             };
 
             return remember;

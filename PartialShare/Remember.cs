@@ -43,5 +43,6 @@
         public double LastWidth { get; set; }
         public double LastHeight { get; set; }
         public bool IsResizing { get; set; }
+        public double BorderSize { get; set; }
     }
 }
