@@ -11,14 +11,14 @@
         Height="1000"
         Width="1000"
         ResizeMode="CanResizeWithGrip"
-        Opacity="0"
+        Opacity="0.5"
         Topmost="True"
         AllowsTransparency="True"
         WindowStyle="None">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="30"  
-            CornerRadius ="0"
+            CornerRadius ="10"
             ResizeBorderThickness="20"         
             GlassFrameThickness="0">
         </WindowChrome>

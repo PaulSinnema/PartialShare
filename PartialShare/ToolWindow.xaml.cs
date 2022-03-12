@@ -42,6 +42,7 @@ namespace PartialShare
             var resizing = MainWindow.ToggleResizing();
 
             BorderSize.IsEnabled = resizing;
+
             DimControls(resizing);
         }
 

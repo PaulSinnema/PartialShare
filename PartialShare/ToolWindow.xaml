@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:PartialShare"
         mc:Ignorable="d"
         x:Name="Tools"
-        Title="ToolWindow"
+        Title="Partial share"
         Background="Transparent"
         AllowsTransparency="False"
         WindowStyle="ThreeDBorderWindow"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Height="400"
         Width="620">
     <Border Background="#272537">

@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PartialShare
@@ -8,6 +12,10 @@ namespace PartialShare
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string RememberFile = "PartialShare.json";
+
+        private Remember? Remember { get; set; }
+
         private double _BorderSize = 20;
 
         public double BorderSize
@@ -32,6 +40,89 @@ namespace PartialShare
             ToolWindow toolWindow = new ToolWindow(this);
 
             toolWindow.Show();
+        }
+
+        private void SetRemember(Remember? remember)
+        {
+            if (remember != null)
+            {
+                this.Top = remember.LastY;
+                this.Left = remember.LastX;
+                this.Width = remember.LastWidth;
+                this.Height = remember.LastHeight;
+            }
+        }
+
+        private Remember GetRemember()
+        {
+            var remember = new Remember()
+            {
+                LastX = this.Left,
+                LastY = this.Top,
+                LastWidth = this.Width,
+                LastHeight = this.Height
+            };
+
+            return remember;
+        }
+
+        private void RestoreRemember()
+        {
+            Remember? remember = null;
+
+            if (File.Exists(RememberFile))
+            {
+                var file = File.OpenRead(RememberFile);
+
+                var buffer = new byte[file.Length];
+
+                file.Read(buffer, 0, (int)file.Length);
+
+                file.Close();
+                file.Dispose();
+
+                var content = UTF8Encoding.ASCII.GetString(buffer);
+
+                remember = Newtonsoft.Json.JsonConvert.DeserializeObject<Remember>(content);
+
+                SetRemember(remember);
+            }
+        }
+
+        private bool IsActivated = false;
+
+        protected override void OnActivated(EventArgs e)
+        {
+            if (!IsActivated)
+            {
+                RestoreRemember();
+
+                IsActivated = true;
+            }
+
+            base.OnActivated(e);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var remember = GetRemember();
+
+            SaveRemember(remember);
+
+            base.OnClosing(e);
+        }
+
+        private static void SaveRemember(Remember remember)
+        {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(remember);
+            var bytes = UTF8Encoding.ASCII.GetBytes(json);
+
+            var file = File.Open(RememberFile, FileMode.Create);
+
+            file.Write(bytes, 0, bytes.Length);
+
+            file.Close();
+            file.Dispose();
         }
 
         public bool ToggleResizing()
@@ -64,7 +155,7 @@ namespace PartialShare
             }
             else
             {
-                PartialShare.Opacity = 1;
+                PartialShare.Opacity = 0.5;
                 BorderThickness = new Thickness(1);
             }
         }
