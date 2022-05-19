@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         BorderThickness="1"
         BorderBrush="Blue"
+        MaxHeight="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}"
         Height="1000"
         Width="1000"
         ResizeMode="CanResizeWithGrip"
@@ -25,6 +26,6 @@
     </WindowChrome.WindowChrome>
 
     <Window.Background>
-        <SolidColorBrush Opacity="1.0" />
+        <SolidColorBrush Opacity="1.0" Color="Transparent" />
     </Window.Background>
 </Window>

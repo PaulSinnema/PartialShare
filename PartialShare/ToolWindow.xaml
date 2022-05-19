@@ -11,12 +11,12 @@
         AllowsTransparency="False"
         WindowStyle="ThreeDBorderWindow"
         ResizeMode="CanMinimize"
-        Height="400"
+        Height="170"
         Width="620">
     <Border Background="#272537">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="45"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
 
@@ -32,16 +32,15 @@
                        Foreground="White"
                        FontSize="22"/>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
                 <Button Click="Button_Click"
                         Style="{StaticResource ButtonTheme}">Resize partial window</Button>
 
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 

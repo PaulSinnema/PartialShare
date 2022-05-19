@@ -119,6 +119,8 @@ namespace PartialShare
         {
             InitializeWindows();
 
+            // this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
             base.OnInitialized(e);
         }
 
