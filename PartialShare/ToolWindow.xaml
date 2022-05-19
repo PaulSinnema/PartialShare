@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PartialShare"
         mc:Ignorable="d"
         x:Name="Tools"
-        Title="Partial share"
+        Title="Partial share tool window (don't share this one)"
         Background="Transparent"
         AllowsTransparency="False"
         WindowStyle="ThreeDBorderWindow"
