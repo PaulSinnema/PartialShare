@@ -4,6 +4,10 @@ A few months ago I bought myself a nice curved 49" Monitor with my computer syst
 
 If I share my huge desktop with my colleagues everything gets too small on their end. So I started looking for a solution and found one in a program here on GitHub called screen-area-share. It gives you the ability to select part of your screen and share that with others. That application has some problems. I took a look at that code and came to the conclusion that this was a difficult approach. There should be an easier way to do this. So I embarced on a code mission of my own resulting in this little WPF application that is just that. A simple solution to the problem.
 
+## Known issue
+
+I've discovered a flaw that I have not been able to solve thus far. Pop-ups (f.i. right-click menus) are shown as empty boxes to the viewers.
+
 ## How to use it
 
 Simply load the application into Visual Studio 2022 (I think 2019 will work too) and press F5 to build and run the application. The rest is intuitive.

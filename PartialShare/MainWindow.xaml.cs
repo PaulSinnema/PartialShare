@@ -199,7 +199,7 @@ namespace PartialShare
             {
                 ResizeMode = ResizeMode.NoResize;
                 PartialShare.Opacity = 0.5;
-                BorderThickness = new Thickness(1);
+                PartialShare.BorderThickness = new Thickness(1);
             }
         }
     }
